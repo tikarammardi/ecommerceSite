@@ -6,7 +6,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bodyParser = require('body-parser');
 const flash = require('connect-flash');
-const connection = require('./config/database');
+
 
 
 
@@ -65,7 +65,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get('*', (req, res, next) => {
+app.use((req, res, next) => {
   res.locals.user = req.user || null; //creating global variable
   next();
 })

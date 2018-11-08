@@ -1,4 +1,4 @@
-<% include includes/header %>
+<%- include('includes/header') %>
 
 <div class="container">
 <%- messages() %>
@@ -13,9 +13,9 @@
     <input placeholder="Password" id="password" name="password" type="password" class="validate">
     <label  for="password">Password</label>
     </div>
-       
-        <button type="submit" class="btn">Login In</button>
+    <p>No Account? <a href="/users/register">Register</a></p>  
+    <button type="submit" class="btn">Sign In</button>
       </form>
  </div>
 
-<% include includes/footer %>
+ <%- include('includes/footer') %>

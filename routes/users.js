@@ -95,35 +95,59 @@ router.post('/register', (req, res) => {
 
 });
 
+//Seralize user into session
+//customers -> name of out table in DB
+passport.serializeUser((user, done) => {
+    done(null, user.customerId);
+});
+
+passport.deserializeUser((customerId, done) => {
+    connection.query(`SELECT * FROM customers WHERE customerId = '${customerId}'`, (err, results) => {
+        if (err) return done(err)
+        console.log(results)
+        done(null, results[0].name);
+    });
+});
+
+
+
 //Sign in by grabbing username and password from the sign in page AND
 //finding our  user by the username from the database and then
 //Matching it's enctypted password with entered password
-passport.use(new LocalStrategy(
-    (username, password, done) => {
-        db.users.findOne({
-            username: username
-        }, (err, user) => {
-            if (err) return done(err);
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true
+}, (req, email, password, done) => {
+    let person = {
+        email: req.body.email,
+        password: req.body.password
+    }
 
-            if (!user) {
+    let q = `SELECT customerId,password FROM customers WHERE email = '${person.email}'`;
+
+    connection.query(q, (err, results) => {
+        if (err) return done(err);
+
+        if (!results) {
+            return done(null, false, {
+                message: 'Incorrect email Id'
+            });
+        }
+        console.log(results);
+        bcrypt.compare(person.password, results[0].password, (err, isMatch) => {
+            if (err) return done(err);
+            if (isMatch) {
+                return done(null, results[0]);
+            } else {
                 return done(null, false, {
-                    message: 'Incorrect Username'
+                    message: 'Incorrect Password'
                 });
             }
-            bcrypt.compare(password, user.password, (err, isMatch) => {
-                if (err) return done(err);
-                if (isMatch) {
-                    return done(null, user);
-                } else {
-                    return done(null, false, {
-                        message: 'Incorrect Password'
-                    });
-                }
-            });
-
         });
-    }
-));
+
+    });
+}));
 
 //Login-POST
 router.post('/login',
