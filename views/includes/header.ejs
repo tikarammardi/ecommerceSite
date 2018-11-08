@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
+ 
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Ecommerce</title>
+    <!--===============================================================================================-->
+</head>
+
+<body>
+
+    <nav class="black darken-4">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">YourShop</a>
+                <a class="button-collapse" data-activates="mobile-nav" href="#">
+                    <i class="material-icons">menu</i>
+                </a>
+                <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="/product">Shop</a>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+
+
+                    <!-- BUTTON LINK -->
+                    <li>
+                        <a href="/users/login" class="btn waves-effect waves-light">Login</a>
+                    </li>
+                    <li>
+                        <a href="/users/register" class="btn waves-effect waves-light">Register</a>
+                    </li>
+                    <!-- ICON LINK -->
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">person  </i> 
+                            <%= %> <!-- name of user who is logged in -->
+                        </a>
+                    </li>
+                    <li><a href="/users/logout">Logout</a></li>
+                </ul>
+                <ul class="side-nav" id="mobile-nav">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="/product">Shop</a>
+                    </li>
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    <li>
+                        <a href="/contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>

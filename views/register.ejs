@@ -1,0 +1,65 @@
+<% include includes/header %>
+
+<div class="container">
+<% if(locals.errors) { %> 
+  <% errors.forEach((error)=> { %>
+    <div class="alert alert-danger"><%= error.msg %></div>
+  <%})%>
+  <% } %>
+  <%- messages() %>
+<h2>User Registration</h2>
+<p>Please fill the form to register</p>
+  <form method = "POST" action="/users/register">
+   <!-- TEXT FIELD -->
+   <div class="input-field">
+   <input id="name" name="name" type="text">
+   <label for="name">Name</label>
+  </div>
+
+  <!-- VALIDATION & ERROR -->
+  <div class="input-field">
+  <input placeholder="Email" id="email"  name="email" type="email" class="validate">
+  <label data-error="Invalid" data-success="Valid" for="email">Email</label>
+  </div>
+
+  <div class="input-field">
+  <input placeholder="Password" id="password" name="password" type="password" class="validate">
+  <label  for="password">Password</label>
+  </div>
+   <!-- TEXT FIELD -->
+   <div class="input-field">
+   <input id="address" name="address" type="text">
+   <label for="address">Address</label>
+  </div>
+  <div class="input-field">
+   <input id="state" name="state" type="text">
+   <label for="state">State</label>
+  </div>
+  <div class="input-field">
+   <input id="city" name="city" type="text">
+   <label for="city">City</label>
+  </div>
+  <div class="input-field">
+   <input id="zip" name="zip" type="text">
+   <label for="zip">Zip</label>
+  </div>
+  <div class="input-field">
+   <input id="mobile" name="mobile" type="text">
+   <label for="mobile">Mobile</label>
+  </div>
+   <!-- RADIO BUTTONS -->
+   <p>
+   <input class="with-gap" type="radio" name="gender" id="male" value="M" checked>
+   <label for="male">Male</label>
+ </p>
+ <p>
+   <input class="with-gap" type="radio" name="gender" id="female" value="F">
+   <label for="female">Female</label>
+ </p>
+    
+    <button type="submit" class="btn ">Sign up</button>
+  </form>
+  
+</div>
+  
+  <% include includes/footer %>

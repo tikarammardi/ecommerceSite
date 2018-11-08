@@ -1,0 +1,26 @@
+<% include includes/header %>
+<!-- Product -->
+<div class="container">
+	<div class="row">
+		<%  results.forEach (product => { %>
+		<div class="col s12 m6 l3"><p>s12 m6 l3</p>
+		<div class="card blue-grey lighten-4">
+			<div class="card-image">
+				<img src=<%= product.product_img %>
+					<span class="card-title"><p><%= product.product_desc %></p></span>
+					<a>
+					<i class="material-icons">Buy Now</i>Quick View</a>
+			</div>
+				<div class="card-content">
+					<p><%= product.product_desc %></p>
+				</div>
+				<span>
+				&#8377; <%= product.product_price%>
+				</span>
+			</div>
+		</div>
+		<% }); %>	
+</div>
+</div>
+
+<% include includes/footer %>

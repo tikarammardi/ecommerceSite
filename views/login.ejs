@@ -1,0 +1,21 @@
+<% include includes/header %>
+
+<div class="container">
+<%- messages() %>
+  <p >Enter your Credential </p>
+    <form method= "POST" action="/users/login">
+    <div class="input-field">
+    <input placeholder="Email" id="email"  name="email" type="email" class="validate">
+    <label data-error="Invalid" data-success="Valid" for="email">Email</label>
+    </div>
+  
+    <div class="input-field">
+    <input placeholder="Password" id="password" name="password" type="password" class="validate">
+    <label  for="password">Password</label>
+    </div>
+       
+        <button type="submit" class="btn">Login In</button>
+      </form>
+ </div>
+
+<% include includes/footer %>
