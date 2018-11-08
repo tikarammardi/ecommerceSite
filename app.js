@@ -1,18 +1,18 @@
-let express = require('express');
-let path = require('path');
-let expressValidator = require('express-validator');
-let session = require('express-session');
-let passport = require('passport');
-let LocalStrategy = require('passport-local').Strategy;
-let bodyParser = require('body-parser');
-let flash = require('connect-flash');
+const express = require('express');
+const path = require('path');
+const expressValidator = require('express-validator');
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const bodyParser = require('body-parser');
+const flash = require('connect-flash');
 
 //Setting our routes
-let index = require('./routes/index');
-let users = require('./routes/users');
-let shoppingCart = require('./routes/shoppingcart');
+const index = require('./routes/index');
+const users = require('./routes/users');
+const shoppingCart = require('./routes/shoppingcart');
 
-let app = express();
+const app = express();
 
 //View Engine
 app.set('views',path.join(__dirname, 'views'));
