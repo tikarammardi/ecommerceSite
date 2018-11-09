@@ -1,25 +1,28 @@
 <%- include('includes/header') %>
 <!-- Product -->
 <div class="container">
+<%- messages() %>
 	<div class="row">
-		<%  results.forEach (product => { %>
-		<div class="col s12 m6 l3"><p>s12 m6 l3</p>
-		<div class="card blue-grey lighten-4">
+	
+	<%  results.forEach (product => { %>	
+	<div class="col s12 m6 l3 ">
+		<div class="card">
 			<div class="card-image">
-				<img src=<%= product.product_img %>
-					<span class="card-title"><p><%= product.product_desc %></p></span>
-					<a>
-					<i class="material-icons">Buy Now</i>Quick View</a>
+				<img src= <%= product.product_img %> 
 			</div>
-				<div class="card-content">
-					<p><%= product.product_desc %></p>
-				</div>
-				<span>
-				&#8377; <%= product.product_price%>
-				</span>
-			</div>
+		<div class="card-content">
+			<p><%= product.product_desc %></p>
 		</div>
-		<% }); %>	
+		<span>&#8377; <%= product.product_price%></span>
+	  </div>
+	  <div class="card-action">
+	  <form action="/products/add/shoppingcart/<%= product.product_id%>">
+      <button class="btn waves-effect waves-light" > Add To Cart <i class="material-icons right">shopping_cart</i> </button></form>
+          </div>
+	</div>
+	</div>
+
+<% }); %>	
 </div>
 </div>
 

@@ -19,7 +19,7 @@
     <nav class="black darken-4">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo">YourShop</a>
+                <a href="/" class="brand-logo">YourShop</a>
                 <a class="button-collapse" data-activates="mobile-nav" href="#">
                     <i class="material-icons">menu</i>
                 </a>
@@ -33,27 +33,35 @@
                     <li>
                         <a href="#">About</a>
                     </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
+                  
 
 
-                    <!-- BUTTON LINK -->
-                    <li>
-                        <a href="/users/login" class="btn waves-effect waves-light">Login</a>
-                    </li>
-                    <li>
-                        <a href="/users/register" class="btn waves-effect waves-light">Register</a>
-                    </li>
+                   
                     <!-- ICON LINK -->
+                    <li>
+                        <a href="/products/shoppingcart">
+                            <i class="material-icons">shopping_cart </i> 
+                           </a>
+                          
+                    </li>
                     <li>
                         <a href="#">
                             <i class="material-icons">person </i> 
                            </a>
                           
                     </li>
+                    
                     <li> <%= user %></li><!-- name of user who is logged in -->
                     <li><a href="/users/logout">Logout</a></li>
+
+                     <!-- BUTTON LINK -->
+                     <li>
+                     <a href="/users/login" class="btn waves-effect waves-light">Sign In</a>
+                 </li>
+                 <li>
+                     <a href="/users/register" class="btn waves-effect waves-light">Register</a>
+                 </li>
+                    
                 </ul>
                 <ul class="side-nav" id="mobile-nav">
                     <li>
@@ -66,9 +74,27 @@
                         <a href="/about">About</a>
                     </li>
                     <li>
-                        <a href="/contact">Contact</a>
-                    </li>
+                    <a href="/products/add/shoppingcart">
+                        <i class="material-icons">shopping_cart </i> 
+                       </a>
+                      
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="material-icons">person </i> 
+                       </a>
+                      <p class="text-black"> <%= user %></p>
+                </li><!-- name of user who is logged in -->
+                <li><a href="/users/logout">Logout</a></li>
+                <li>
+                <a href="/users/login" class="btn waves-effect waves-light">Login</a>
+            </li>
+            <li>
+                <a href="/users/register" class="btn waves-effect waves-light">Register</a>
+            </li>
+                   
                 </ul>
             </div>
         </div>
     </nav>
+    

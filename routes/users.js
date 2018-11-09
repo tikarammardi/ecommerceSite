@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-let bcrypt = require('bcryptjs');
-let passport = require('passport');
-let LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 const connection = require('../config/database');
 
 
@@ -70,26 +70,41 @@ router.post('/register', (req, res) => {
     } else {
 
 
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(person.password, salt, (err, hash) => {
-                person.password = hash;
+        connection.query('SELECT * FROM customers', (err, results) => {
+            if (err) throw err;
 
-                let q = 'INSERT INTO customers SET ?';
-                connection.query(q, person, (err, results) => {
-                    if (err) {
-                        res.send(err);
-                    } else {
-                        console.log("User added .........")
-                        //Our success message
-                        req.flash('success', 'Your are registered and can now log in');
-                        console.log(results);
-                        //REdiredt after user registeration
-                        res.location('/');
-                        res.redirect('/');
-                    }
+
+            if (!(results[0].email == person.email)) {
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(person.password, salt, (err, hash) => {
+                        person.password = hash;
+
+                        let q = 'INSERT INTO customers SET ?';
+                        connection.query(q, person, (err, results) => {
+                            if (err) {
+                                res.send(err);
+                            } else {
+                                console.log("User added .........")
+                                //Our success message
+                                req.flash('success', 'Your are registered and can now log in');
+
+                                //REdiredt after user registeration
+                                res.location('/');
+                                res.redirect('/');
+                            }
+                        });
+                    });
                 });
-            });
+            } else {
+                req.flash('success', 'Email already exist please login');
+                res.redirect('/users/login');
+
+            }
+
+
         });
+
+
 
     }
 
@@ -98,13 +113,15 @@ router.post('/register', (req, res) => {
 //Seralize user into session
 //customers -> name of out table in DB
 passport.serializeUser((user, done) => {
-    done(null, user.customerId);
+    console.log(`Serialize ${user.customer_id}`);
+    done(null, user.customer_id);
 });
 
-passport.deserializeUser((customerId, done) => {
-    connection.query(`SELECT * FROM customers WHERE customerId = '${customerId}'`, (err, results) => {
+passport.deserializeUser((customer_id, done) => {
+    console.log(`DESerialize ${customer_id}`);
+    connection.query(`SELECT * FROM customers WHERE customer_id = '${customer_id}'`, (err, results) => {
         if (err) return done(err)
-        console.log(results)
+
         done(null, results[0].name);
     });
 });
@@ -124,9 +141,9 @@ passport.use(new LocalStrategy({
         password: req.body.password
     }
 
-    let q = `SELECT customerId,password FROM customers WHERE email = '${person.email}'`;
+    let q = `SELECT * FROM customers WHERE email = ?`;
 
-    connection.query(q, (err, results) => {
+    connection.query(q, person.email, (err, results) => {
         if (err) return done(err);
 
         if (!results) {

@@ -6,18 +6,15 @@ const {
 } = require('../helpers/auth');
 
 
-router.get('/', ensureAuthenticated, (req, res) => {
+router.get('/', (req, res) => {
     res.render('index');
 });
 
 router.get('/product', (req, res) => {
 
 
-    connection.query('SELECT * FROM product', (err, results) => {
+    connection.query('SELECT * FROM products', (err, results) => {
         if (err) throw err;
-
-
-        console.log(results);
 
         res.render('product', {
             results
